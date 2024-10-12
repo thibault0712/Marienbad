@@ -1,4 +1,10 @@
-# Marienbad Game ![workflow](https://github.com/Thibault0712/Marienbad/actions/workflows/main.yml/badge.svg)
+# Marienbad Game 
+![workflow](https://github.com/Thibault0712/Marienbad/actions/workflows/main.yml/badge.svg)
+![Build Status](https://github.com/Thibault0712/Marienbad/actions/workflows/ci.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/Thibault0712/Marienbad/badge.svg?branch=main)](https://coveralls.io/github/Thibault0712/Marienbad?branch=main)
+![Java](https://img.shields.io/badge/Java-17-blue.svg)
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 This project implements the famous Marienbad game in Java. It includes two versions: a two-player game and a player vs. bot game.
 ![Main Menu](https://github.com/Thibault0712/Marienbad/blob/main/pictures/home.png?raw=true)
