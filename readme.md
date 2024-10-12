@@ -1,7 +1,5 @@
 # Marienbad Game 
 ![workflow](https://github.com/Thibault0712/Marienbad/actions/workflows/main.yml/badge.svg)
-![Build Status](https://github.com/Thibault0712/Marienbad/actions/workflows/ci.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/Thibault0712/Marienbad/badge.svg?branch=main)](https://coveralls.io/github/Thibault0712/Marienbad?branch=main)
 ![Java](https://img.shields.io/badge/Java-17-blue.svg)
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
