@@ -1,6 +1,7 @@
 # Marienbad Game
 
 This project implements the famous Marienbad game in Java. It includes two versions: a two-player game and a player vs. bot game.
+![Main Menu](https://github.com/Thibault0712/Marienbad/blob/main/pictures/home.png?raw=true)
 
 ## Authors
 
@@ -16,7 +17,7 @@ The project consists of two main files:
 
 ## Game Rules
 
-Marienbad is a strategic game where players take turns removing sticks from different rows. The player who removes the last stick loses the game.
+Marienbad is a strategic game where players take turns removing sticks from different rows. The player who removes the last stick won the game.
 
 ## Features
 
