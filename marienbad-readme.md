@@ -1,0 +1,89 @@
+# Marienbad Game
+
+This project implements the famous Marienbad game in Java. It includes two versions: a two-player game and a player vs. bot game.
+
+## Authors
+
+- T. FALEZAN
+- A. LETAN
+
+## Project Structure
+
+The project consists of two main files:
+
+1. `Marienbad.java`: Implements the two-player version of the game.
+2. `MarienbadBot.java`: Implements the player vs. bot version of the game.
+
+## Game Rules
+
+Marienbad is a strategic game where players take turns removing sticks from different rows. The player who removes the last stick loses the game.
+
+## Features
+
+- Interactive command-line interface
+- Colorful ASCII art for the game title
+- Dynamic game board display
+- Input validation and error handling
+- Unit tests for core game logic
+
+## How to Play
+
+1. Run the game (either `Marienbad.java` or `MarienbadBot.java`).
+2. Choose to start the game or run unit tests.
+3. Enter player names and game parameters as prompted.
+4. Take turns removing sticks from the rows.
+5. The game ends when a player removes the last stick.
+
+## Game Modes
+
+### Two-Player Mode (`Marienbad.java`)
+
+- Two human players compete against each other.
+- Players take turns removing sticks.
+
+### Player vs. Bot Mode (`MarienbadBot.java`)
+
+- One human player competes against a computer-controlled bot.
+- The bot makes random moves.
+
+## Implementation Details
+
+- The game uses ANSI escape codes for colored output in the terminal.
+- The game board is represented as an array of integers, where each element represents the number of sticks in a row.
+- Input validation ensures that players make legal moves.
+
+## Unit Tests
+
+Both versions include unit tests for the following methods:
+
+- `generateLinesContent()`: Tests the initial game board generation.
+- `playerWon()`: Tests the win condition detection.
+
+To run the tests, choose option 'b' from the main menu.
+
+## Execution Screenshots
+
+Here are some screenshots of the game in action:
+
+1. Main Menu
+   ![Main Menu](placeholder-for-main-menu-screenshot.png)
+
+2. Game Board
+   ![Game Board](placeholder-for-game-board-screenshot.png)
+
+3. Player Turn
+   ![Player Turn](placeholder-for-player-turn-screenshot.png)
+
+4. Game Over
+   ![Game Over](placeholder-for-game-over-screenshot.png)
+
+## Future Improvements
+
+- Implement a smarter AI for the bot version
+- Add difficulty levels for the bot
+- Create a graphical user interface (GUI) version
+- Implement network play for remote multiplayer games
+
+## Acknowledgements
+
+This project was created as part of a programming assignment to evaluate our skills at the IUT Informatique de Vannes.
