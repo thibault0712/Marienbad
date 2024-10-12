@@ -4,8 +4,8 @@ This project implements the famous Marienbad game in Java. It includes two versi
 
 ## Authors
 
-- T. FALEZAN
-- A. LETAN
+- Thibault FALEZAN
+- Augustin LETANG
 
 ## Project Structure
 
@@ -66,23 +66,13 @@ To run the tests, choose option 'b' from the main menu.
 Here are some screenshots of the game in action:
 
 1. Main Menu
-   ![Main Menu](placeholder-for-main-menu-screenshot.png)
+   ![Main Menu](https://github.com/Thibault0712/Marienbad/blob/main/pictures/home.png?raw=true)
 
-2. Game Board
-   ![Game Board](placeholder-for-game-board-screenshot.png)
+2. Player Turn
+   ![Player Turn](https://github.com/Thibault0712/Marienbad/blob/main/pictures/playerTurn.png?raw=true)
 
-3. Player Turn
-   ![Player Turn](placeholder-for-player-turn-screenshot.png)
-
-4. Game Over
-   ![Game Over](placeholder-for-game-over-screenshot.png)
-
-## Future Improvements
-
-- Implement a smarter AI for the bot version
-- Add difficulty levels for the bot
-- Create a graphical user interface (GUI) version
-- Implement network play for remote multiplayer games
+3. Player Select Line
+   ![Player Turn](https://github.com/Thibault0712/Marienbad/blob/main/pictures/playerSelectLine.png?raw=true)
 
 ## Acknowledgements
 
