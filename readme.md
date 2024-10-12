@@ -1,4 +1,4 @@
-# Marienbad Game ![workflow](https://github.com/Thibault0712/Marienbad/actions/workflows/WORKFLOW-FILE/badge.svg)
+# Marienbad Game ![workflow](https://github.com/Thibault0712/Marienbad/actions/workflows/main.yml/badge.svg)
 
 This project implements the famous Marienbad game in Java. It includes two versions: a two-player game and a player vs. bot game.
 ![Main Menu](https://github.com/Thibault0712/Marienbad/blob/main/pictures/home.png?raw=true)
