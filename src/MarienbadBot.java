@@ -4,7 +4,8 @@ import java.util.Arrays;
 * Code who allow to play a famous game called Marienbad
 * @author T.FALEZAN A.LETAN
 */
-class Marienbad{
+
+class MarienbadBot {
 
 	void principal(){
 		launchHome();
@@ -39,30 +40,32 @@ class Marienbad{
 	 * Start the game and manage who should play
 	 */
 	void launchGame(){
-		String player1 = SimpleInput.getString("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nom du premier joueur : ");
-		String player2 = SimpleInput.getString("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nom du second joueur : ");
-		while(player2.equalsIgnoreCase(player1)){
-			System.out.println("\u001B[31m[ERREUR]\u001B[0m Les deux noms doivent être différent");
-			player2 = SimpleInput.getString("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nom du second joueur : ");
+		int playerWhoPlay; //1 -> First Player || 2 -> bot
+		int lineNumber;
+
+		String player1 = SimpleInput.getString("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nom joueur : ");
+        playerWhoPlay = SimpleInput.getInt("\u001B[34m[PARAMETRAGE]\u001B[0m Choisisser le joueur qui commence ? (1 -> " + player1 + " | 2 -> Robot) : ");
+		while (playerWhoPlay != 1 && playerWhoPlay != 2){
+			System.out.println("\u001B[31m[ERREUR]\u001B[0m Sélection mauvaise");
+			playerWhoPlay = SimpleInput.getInt("\u001B[34m[PARAMETRAGE]\u001B[0m Choisisser le joueur qui commence ? (1 -> " + player1 + " | 2 -> Robot) : ");
+
 		}
-		int lineNumber = SimpleInput.getInt("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nombre de ligne à utiliser pour jouer : ");
+
+		lineNumber = SimpleInput.getInt("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nombre de ligne à utiliser pour jouer : ");
 		while(lineNumber < 2 || lineNumber > 15){
 			System.out.println("\u001B[31m[ERREUR]\u001B[0m nombre de ligne incorrect, le nombre de ligne doit être compris entre 2 et 15");
 			lineNumber = SimpleInput.getInt("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nombre de ligne à utiliser pour jouer : ");
 		}
 		int[] linesContent = generateLinesContent(lineNumber);
 
-		int playerWhoPlay = 1; //1 -> First Player || 2 -> Second Player
-
 		while(!playerWon(linesContent)){
 			displayClear();
 			if (playerWhoPlay == 1){
 				displayGame(linesContent, player1);
-				removeStick(linesContent, player1);
+				playerRemoveStick(linesContent, player1);
 				playerWhoPlay = 2;
 			}else{
-				displayGame(linesContent, player2);
-				removeStick(linesContent, player2);
+				botRemoveStick(linesContent);
 				playerWhoPlay = 1;
 			}
 		}
@@ -72,9 +75,9 @@ class Marienbad{
 		System.out.println("\n\n");
 		System.out.println("\t\t═════════════════════════════════════════════════════════════════════════════════════════");
 		if(playerWhoPlay == 1){
-			System.out.println("\t\t                                " + player2 + " a gagné. Bien joué à lui"); //player2 because the while loop switch playerWhoPlay before leave
+			System.out.println("\t\t                                    Le robot a gagné !"); //player2 because the while loop switch playerWhoPlay before leave
 		}else{
-			System.out.println("\t\t                                " + player1 + " a gagné. Bien joué à lui"); //Same
+			System.out.println("\t\t                                " + player1 + " a gagné. Bien joué à toi"); //Same
 		}
 		System.out.println("\t\t═════════════════════════════════════════════════════════════════════════════════════════");
 
@@ -272,12 +275,12 @@ class Marienbad{
 		displayTab(n);
 		System.out.println(") = " + result);
 	}
-
+	
 	/**
-	 * Create an interface for player to remove sticks in a line and verify if it's possible
-	 * @param linesContent is a table with the stick number of all lines
-	 */
-	void removeStick(int[] linesContent, String playerName){
+	* Create an interface for player to remove sticks in a line and verify if it's possible
+	* @param linesContent is a table with the stick number of all lines
+	*/
+	void playerRemoveStick(int[] linesContent, String playerName){
 		boolean removeDone = false;
 		int line;
 		int stickNumberToRemove;
@@ -304,6 +307,19 @@ class Marienbad{
 				}
 			}
 		}while(!removeDone);
+	}
+
+	/**
+	 * Remove sticks in a line by a bot
+	 * @param linesContent is a table with the stick number of all lines
+	 */
+	void botRemoveStick(int[] linesContent){
+		int randomLine;
+		do {
+			randomLine = (int) (linesContent.length * Math.random());
+		}while(linesContent[randomLine] <= 0);
+		int randomStickNumber = (int) (linesContent[randomLine] * Math.random()) + 1;
+		linesContent[randomLine] -= randomStickNumber;
 	}
 
 	/**
