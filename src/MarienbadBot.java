@@ -71,6 +71,7 @@ class MarienbadBot {
 		}
 
 		//A player won
+		displayGame(linesContent, player1); //If clear don't work we show an empty table to be more comprehensible
 		displayClear();
 		System.out.println("\n\n");
 		System.out.println("\t\t═════════════════════════════════════════════════════════════════════════════════════════");
@@ -314,12 +315,28 @@ class MarienbadBot {
 	 * @param linesContent is a table with the stick number of all lines
 	 */
 	void botRemoveStick(int[] linesContent){
-		int randomLine;
-		do {
-			randomLine = (int) (linesContent.length * Math.random());
-		}while(linesContent[randomLine] <= 0);
-		int randomStickNumber = (int) (linesContent[randomLine] * Math.random()) + 1;
-		linesContent[randomLine] -= randomStickNumber;
+		boolean canWin = false;
+		int i = 0;
+
+		//Verify if bot can win
+		while(!canWin && i < linesContent.length){
+			int[] tempTab = Arrays.copyOf(linesContent, linesContent.length);
+			tempTab[i] = 0;
+			if(playerWon(tempTab)){
+				canWin = true;
+				linesContent[i] = 0;
+			}
+			i += 1;
+		}
+
+		if(!canWin){
+			int randomLine;
+			do {
+				randomLine = (int) (linesContent.length * Math.random());
+			}while(linesContent[randomLine] <= 0);
+			int randomStickNumber = (int) (linesContent[randomLine] * Math.random()) + 1;
+			linesContent[randomLine] -= randomStickNumber;
+		}
 	}
 
 	/**
