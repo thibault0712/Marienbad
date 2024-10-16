@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 /**
-* Code who allow to play a famous game called Marienbad
-* @author T.FALEZAN A.LETAN
+* Code who allow to play a famous game called Marienbad with a bot
+* @author T.FALEZAN A.LETANG
 */
 
 class MarienbadBot {
@@ -31,7 +31,8 @@ class MarienbadBot {
 		}else{
 			testPlayerWon();
 			testGenerateLinesContent();
-			SimpleInput.getString("\u001B[34m[MENU PRINCIPAL]\u001B[0m Appuyer sur ENTER pour relancer > ");
+			testBotRemoveStick();
+			SimpleInput.getString("\u001B[34m[MENU PRINCIPAL]\u001B[0m Entrer n'importe quelle touche pour relancer > ");
 			launchHome();
 		}
 	}
@@ -43,7 +44,7 @@ class MarienbadBot {
 		int playerWhoPlay; //1 -> First Player || 2 -> bot
 		int lineNumber;
 
-		String player1 = SimpleInput.getString("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nom joueur : ");
+		String player1 = SimpleInput.getString("\u001B[34m[PARAMETRAGE]\u001B[0m Entrer le nom du joueur : ");
         playerWhoPlay = SimpleInput.getInt("\u001B[34m[PARAMETRAGE]\u001B[0m Choisisser le joueur qui commence ? (1 -> " + player1 + " | 2 -> Robot) : ");
 		while (playerWhoPlay != 1 && playerWhoPlay != 2){
 			System.out.println("\u001B[31m[ERREUR]\u001B[0m Sélection mauvaise");
@@ -204,7 +205,7 @@ class MarienbadBot {
 	}
 	
 	/**
-	* Test methode generateLinesContent()
+	* Test a call of generateLinesContent()
 	* @param n the number of line we want
 	* @param result expected result
 	*/
@@ -213,7 +214,7 @@ class MarienbadBot {
 		if (Arrays.equals(resExec, result)){ //Arrays.equals to avoid to add a loop who compare each char
 			System.out.print ("\u001B[42m PASS \u001B[0m");
 		} else {
-			System.err.print ("\u001B[41m ERROR \u001B[0m");
+			System.out.print ("\u001B[41m ERROR \u001B[0m");
 		}
 		System.out.print ("  testGenerateLinesContent (");
 		System.out.print(") = ");
@@ -260,7 +261,7 @@ class MarienbadBot {
 	}
 	
 	/**
-	* Test methode playerWon()
+	* Test a call of playerWon()
 	* @param n interger array with stick content per line
 	* @param result expected result
 	*/
@@ -269,7 +270,7 @@ class MarienbadBot {
 		if (resExec == result){
 			System.out.print ("\u001B[42m PASS \u001B[0m");
 		} else {
-			System.err.print ("\u001B[41m ERROR \u001B[0m");
+			System.out.print ("\u001B[41m ERROR \u001B[0m");
 		}
 		// Affichage
 		System.out.print ("  testPlayerWon (");
@@ -293,7 +294,9 @@ class MarienbadBot {
 			displayGameWithHighlight(linesContent, playerName, line);
 			if(line > linesContent.length - 1 || line < 0){
 				System.out.println("\t\t\u001B[31m  [ERREUR]\u001B[0m numéro de ligne mauvais");
-			}else{
+			}else if(linesContent[line] == 0){
+				System.out.println("\t\t\u001B[31m  [ERREUR]\u001B[0m impossible de retirer des batons sur une ligne vide");
+			} else{
 				System.out.println("\t\t═════════════════════════════════════════════════════════════════════════════════════════");
 				stickNumberToRemove = SimpleInput.getInt("\t\t                  Entrer le nombre de baton à retirer : ");
 				displayClear();
@@ -314,29 +317,80 @@ class MarienbadBot {
 	 * Remove sticks in a line by a bot
 	 * @param linesContent is a table with the stick number of all lines
 	 */
-	void botRemoveStick(int[] linesContent){
-		boolean canWin = false;
-		int i = 0;
+	void botRemoveStick(int[] linesContent) {
+		int xorSum = 0;
+		boolean removedLine = false;
+		int e = 0;
+		int j = 0;
 
-		//Verify if bot can win
-		while(!canWin && i < linesContent.length){
-			int[] tempTab = Arrays.copyOf(linesContent, linesContent.length);
-			tempTab[i] = 0;
-			if(playerWon(tempTab)){
-				canWin = true;
-				linesContent[i] = 0;
+		//XOR sum of all lines
+		for (int i = 0; i < linesContent.length; i++) {
+			xorSum ^= linesContent[i];
+		}
+
+		//Try to find a winning position by test all combination
+		while (e < linesContent.length && !removedLine) {
+			int i = 1;
+			//We try all possible moves on the line
+			while (i <= linesContent[e] && !removedLine) {
+				int reducedLine = linesContent[e] - i;
+				int newXorSum = (xorSum ^ linesContent[e]) ^ reducedLine;  // (xorSum ^ linesContent[e]) remove linesContent[e] from xorSum and next ^ reducedLine add the new value
+
+				// Winning condition found
+				if (newXorSum == 0) {
+					removedLine = true;
+					linesContent[e] = reducedLine;
+				}
+				i += 1;
 			}
-			i += 1;
+			e++;
 		}
 
-		if(!canWin){
-			int randomLine;
-			do {
-				randomLine = (int) (linesContent.length * Math.random());
-			}while(linesContent[randomLine] <= 0);
-			int randomStickNumber = (int) (linesContent[randomLine] * Math.random()) + 1;
-			linesContent[randomLine] -= randomStickNumber;
+		//Any method found to have a winning position we take the first stick available
+		while(j < linesContent.length && !removedLine){
+			if (linesContent[j] > 0) {
+				linesContent[j] -= 1;
+				removedLine = true;
+			}
+			j += 1;
 		}
+	}
+
+	/**
+	 * Test methode botRemoveStick()
+	 */
+	void testBotRemoveStick () {
+		System.out.println ();
+
+		System.out.println("\u001B[44m INFO \u001B[0m  test BotRemoveStick()");
+		System.out.println("\u001B[36m========================\u001B[0m");
+		testCasBotRemoveStick(new int[]{0, 3, 4, 5}, new int[]{0, 1, 4, 5}); //Test if bot can obtain a winning condition
+		testCasBotRemoveStick(new int[]{1, 2, 3}, new int[]{0, 2, 3}); //Impossible to obtain advantage
+		testCasBotRemoveStick(new int[]{1, 1, 1}, new int[]{0, 1, 1});
+		testCasBotRemoveStick(new int[]{0, 3, 0}, new int[]{0, 0, 0}); //Test if bot can win game when it can
+		System.out.println("\u001B[36m========================\u001B[0m");
+		System.out.println();
+	}
+
+	/**
+	 * Test a call of botRemoveStick()
+	 * @param n interger array with stick content per line
+	 * @param result expected result
+	 */
+	void testCasBotRemoveStick(int[] n, int[] result) {
+		int [] res = n.clone();
+		botRemoveStick(res);
+		if (Arrays.equals(res, result)) {
+			System.out.print ("\u001B[42m PASS \u001B[0m");
+		} else {
+			System.out.print ("\u001B[41m ERROR \u001B[0m");
+		}
+		// Affichage
+		System.out.print ("  testBotRemoveStick (");
+		displayTab(n);
+		System.out.print(") = ");
+		displayTab(result);
+		System.out.println();
 	}
 
 	/**

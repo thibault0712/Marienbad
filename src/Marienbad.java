@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 /**
 * Code who allow to play a famous game called Marienbad
-* @author T.FALEZAN A.LETAN
+* @author T.FALEZAN A.LETANG
 */
 class Marienbad{
 
@@ -30,7 +30,7 @@ class Marienbad{
 		}else{
 			testPlayerWon();
 			testGenerateLinesContent();
-			SimpleInput.getString("\u001B[34m[MENU PRINCIPAL]\u001B[0m Appuyer sur ENTER pour relancer > ");
+			SimpleInput.getString("\u001B[34m[MENU PRINCIPAL]\u001B[0m Entrer n'importe quelle touche pour relancer > ");
 			launchHome();
 		}
 	}
@@ -200,7 +200,7 @@ class Marienbad{
 	}
 	
 	/**
-	* Test methode generateLinesContent()
+	* Test a call of generateLinesContent()
 	* @param n the number of line we want
 	* @param result expected result
 	*/
@@ -209,7 +209,7 @@ class Marienbad{
 		if (Arrays.equals(resExec, result)){ //Arrays.equals to avoid to add a loop who compare each char
 			System.out.print ("\u001B[42m PASS \u001B[0m");
 		} else {
-			System.err.print ("\u001B[41m ERROR \u001B[0m");
+			System.out.print ("\u001B[41m ERROR \u001B[0m");
 		}
 		System.out.print ("  testGenerateLinesContent (");
 		System.out.print(") = ");
@@ -256,7 +256,7 @@ class Marienbad{
 	}
 	
 	/**
-	* Test methode playerWon()
+	* Test a call of playerWon()
 	* @param n interger array with stick content per line
 	* @param result expected result
 	*/
@@ -265,7 +265,7 @@ class Marienbad{
 		if (resExec == result){
 			System.out.print ("\u001B[42m PASS \u001B[0m");
 		} else {
-			System.err.print ("\u001B[41m ERROR \u001B[0m");
+			System.out.print ("\u001B[41m ERROR \u001B[0m");
 		}
 		// Affichage
 		System.out.print ("  testPlayerWon (");
@@ -287,8 +287,10 @@ class Marienbad{
 			line = SimpleInput.getInt("\t\t                         Entrer la ligne à éditer : ");
 			displayClear();
 			displayGameWithHighlight(linesContent, playerName, line);
-			if(line > linesContent.length - 1 || line < 0){
+			if(line > linesContent.length - 1 || line < 0) {
 				System.out.println("\t\t\u001B[31m  [ERREUR]\u001B[0m numéro de ligne mauvais");
+			}else if(linesContent[line] == 0){
+				System.out.println("\t\t\u001B[31m  [ERREUR]\u001B[0m impossible de retirer des batons sur une ligne vide");
 			}else{
 				System.out.println("\t\t═════════════════════════════════════════════════════════════════════════════════════════");
 				stickNumberToRemove = SimpleInput.getInt("\t\t                  Entrer le nombre de baton à retirer : ");

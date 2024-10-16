@@ -1,7 +1,7 @@
 /**
  * Class SimpleInput - input class for input of simple input types
  * eg. int, char, String,float or boolean.
- * 
+ *
  * @author: Bruce Quig
  * @author: Michael Kolling
  * @author: Michel Adam
@@ -11,7 +11,6 @@
  */
 import java.util.Scanner;
 import java.util.Locale;
-
 public class SimpleInput {
     // instance variables
     static final String STRING_TITLE = "Enter a String";
@@ -23,27 +22,27 @@ public class SimpleInput {
     static final String FALSE = "False";
     static final String EMPTY_STRING = "";
     static Scanner sc = new Scanner(System.in);
-    
+
     /**
      ** String input from the user via a simple dialog.
-     ** @param prompt the message string to be displayed inside dialog    
+     ** @param prompt the message string to be displayed inside dialog
      ** @return String input from the user.
      **/
     public static String getString(String prompt) {
         String result;
         System.out.print (prompt);
-        //sc.hasNext();
+        sc.hasNext();
         result = sc.nextLine();
-        //while (result.length() == 0){
-        //    result = sc.nextLine();
-        //}
+        while (result.length() == 0){
+            result = sc.nextLine();
+        }
         return result;
     }
 
 
     /**
      ** char input from the user via a simple dialog.
-     ** @param prompt the message string to be displayed inside dialog  
+     ** @param prompt the message string to be displayed inside dialog
      ** @return char input from the user.
      **/
     public static char getChar(String prompt) {
@@ -54,9 +53,9 @@ public class SimpleInput {
             str = sc.nextLine();
         }
         while (str.length() != 1) {
-			System.out.print (prompt);
-			str = sc.nextLine();
-		}
+            System.out.print (prompt);
+            str = sc.nextLine();
+        }
         return str.charAt(0);
     }
 
@@ -66,89 +65,89 @@ public class SimpleInput {
      ** @return boolean selection from the user
      **/
     public static boolean getBoolean(String prompt) {
-		boolean result = false;
+        boolean result = false;
         boolean validResponse = false;
         while (!validResponse) {
-			try {
-				validResponse = true;
-				System.out.print (prompt);
+            try {
+                validResponse = true;
+                System.out.print (prompt);
                 sc.hasNext();
-				result = sc.nextBoolean();
-			} catch (java.util.InputMismatchException exception) {
-				validResponse = false;
-				sc.nextLine();
-			}
-		}
+                result = sc.nextBoolean();
+            } catch (java.util.InputMismatchException exception) {
+                validResponse = false;
+                sc.nextLine();
+            }
+        }
         return result;
     }
 
 
-   /**
-    ** returns integer input from the user via a simple dialog.
-    ** @param prompt the message string to be displayed inside dialog
-    ** @return the input integer
-    **/
+    /**
+     ** returns integer input from the user via a simple dialog.
+     ** @param prompt the message string to be displayed inside dialog
+     ** @return the input integer
+     **/
     public static int getInt(String prompt) {
         int result = 0;
         boolean validResponse = false;
         while (!validResponse) {
-			try {
-				validResponse = true;
-				System.out.print (prompt);
+            try {
+                validResponse = true;
+                System.out.print (prompt);
                 sc.hasNext();
-				result = sc.nextInt();
-			} catch (java.util.InputMismatchException exception) {
-				validResponse = false;
+                result = sc.nextInt();
+            } catch (java.util.InputMismatchException exception) {
+                validResponse = false;
                 System.out.println ("java.util.InputMismatchException exception");
-				sc.nextLine();
-			}
-		}
+                sc.nextLine();
+            }
+        }
         return result;
     }
 
 
-   /**
-    ** returns a float input from the user via a simple dialog.
-    ** @param prompt the message string to be displayed inside dialog
-    ** @return the input float
-    **/
+    /**
+     ** returns a float input from the user via a simple dialog.
+     ** @param prompt the message string to be displayed inside dialog
+     ** @return the input float
+     **/
     public static float getFloat(String prompt) {
-		float result = 0;
+        float result = 0;
         boolean validResponse = false;
         while (!validResponse) {
-			try {
-				validResponse = true;
-				System.out.print (prompt);
+            try {
+                validResponse = true;
+                System.out.print (prompt);
                 sc.hasNext();
-				result = sc.nextFloat();
-			} catch (java.util.InputMismatchException exception) {
-				validResponse = false;
-				sc.nextLine();
-			}
-		}
+                result = sc.nextFloat();
+            } catch (java.util.InputMismatchException exception) {
+                validResponse = false;
+                sc.nextLine();
+            }
+        }
         return result;
     }
-	
-	   /**
-    ** returns a double input from the user via a simple dialog.
-    ** @param prompt the message string to be displayed inside dialog
-    ** @return the input float
-    **/
+
+    /**
+     ** returns a double input from the user via a simple dialog.
+     ** @param prompt the message string to be displayed inside dialog
+     ** @return the input float
+     **/
     public static double getDouble(String prompt) {
-		double result = 0;
+        double result = 0;
         sc.useLocale(Locale.ENGLISH);
         boolean validResponse = false;
         while (!validResponse) {
-			try {
-				validResponse = true;
-				System.out.print (prompt);
-				result = sc.nextDouble();
-			} catch (java.util.InputMismatchException exception) {
-				validResponse = false;
-				sc.nextLine();
-			}
-		}
+            try {
+                validResponse = true;
+                System.out.print (prompt);
+                result = sc.nextDouble();
+            } catch (java.util.InputMismatchException exception) {
+                validResponse = false;
+                sc.nextLine();
+            }
+        }
         return result;
     }
-	
+
 }
