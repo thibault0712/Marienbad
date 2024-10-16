@@ -334,7 +334,11 @@ class MarienbadBot {
 			//We try all possible moves on the line
 			while (i <= linesContent[e] && !removedLine) {
 				int reducedLine = linesContent[e] - i;
-				int newXorSum = (xorSum ^ linesContent[e]) ^ reducedLine;  // (xorSum ^ linesContent[e]) remove linesContent[e] from xorSum and next ^ reducedLine add the new value
+				
+				//(xorSum ^ linesContent[e]) remove linesContent[e] from xorSum and ^ reducedLine add the new value 
+				//It's also possible to make a copy of linesContent, withdraw i inside linesContentCopy[e] and after  verify if linesContentCopy[e ] return a loose position for the player 
+				//We have decided to use the first method because it's more optimized
+				int newXorSum = (xorSum ^ linesContent[e]) ^ reducedLine;
 
 				// Winning condition found
 				if (newXorSum == 0) {
